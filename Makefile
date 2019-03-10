@@ -4,18 +4,18 @@ TARGET = dist/$(PROJ_NAME)
 FILETYPE = .exe
 
 # compiler options
-CC = gcc
-LCC = clang
+CC = g++
+LCC = clang++
 DFLAGS = -Og -g -Wall # debug flags
 RFLAGS = -O3 -Wall # release flags
 
 # folder/file options
 SRC = src
 OBJ = obj
-SOURCES := $(wildcard $(SRC)/*.c)
-OBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SOURCES))
-DOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-gcc.o, $(SOURCES))
-LOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-clang.o, $(SOURCES))
+SOURCES := $(wildcard $(SRC)/*.cpp)
+OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
+DOBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%-gcc.o, $(SOURCES))
+LOBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%-clang.o, $(SOURCES))
 
 # build recipes
 default: $(TARGET)-clang # default
@@ -37,17 +37,17 @@ clean:
 $(TARGET): $(OBJECTS)
 	$(CC) $(RFLAGS) $^ -o $@$(FILETYPE)
 
-$(OBJ)/%.o: $(SRC)/%.c
+$(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(RFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-gcc: $(DOBJECTS)
 	$(CC) $(DFLAGS) $^ -o $@$(FILETYPE)
 
-$(OBJ)/%-gcc.o: $(SRC)/%.c
+$(OBJ)/%-gcc.o: $(SRC)/%.cpp
 	$(CC) $(DFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-clang: $(LOBJECTS)
 	$(LCC) $(DFLAGS) $^ -o $@$(FILETYPE)
 
-$(OBJ)/%-clang.o: $(SRC)/%.c
+$(OBJ)/%-clang.o: $(SRC)/%.cpp
 	$(LCC) $(DFLAGS) -MMD -c $^ -o $@
