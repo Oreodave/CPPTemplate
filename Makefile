@@ -24,10 +24,8 @@ release: $(TARGET) # release
 gcc: $(TARGET)-gcc
 all: $(TARGET)-gcc $(TARGET)-clang $(TARGET)
 
-# test recipes
-debug:
+debug: $(TARGET)-clang
 	gdb $(TARGET)-clang.exe
-
 
 clean:
 	find . -maxdepth 2 -type f \
