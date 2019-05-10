@@ -25,7 +25,7 @@ gcc: $(TARGET)-gcc
 all: $(TARGET)-gcc $(TARGET)-clang $(TARGET)
 
 # test recipes
-test:
+debug:
 	gdb $(TARGET)-clang.exe
 
 
