@@ -7,7 +7,7 @@ FILETYPE = .exe
 CC = g++
 LCC = clang++
 UFLAGS = -I src/includes #-shared # Universal flags
-DFLAGS = -Og -g -Wall $(UFLAGS) # debug flags
+DFLAGS = -O0 -g -Wall $(UFLAGS) # debug flags
 RFLAGS = -O3 -Wall $(UFLAGS) # release flags
 
 # folder/file options
