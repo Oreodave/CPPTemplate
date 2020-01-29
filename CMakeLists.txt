@@ -23,4 +23,4 @@ target_compile_options(${THIS}-debug PUBLIC -O0 -g -Wall)
 target_compile_options(${THIS}-clean PUBLIC -O3 -Wall)
 
 ## Tests
-add_test(NAME run COMMAND ./${This}-debug WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+add_test(NAME memcheck COMMAND valgrind ./${THIS}-debug WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
